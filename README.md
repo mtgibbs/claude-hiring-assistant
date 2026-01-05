@@ -1,6 +1,6 @@
 # Hiring Evaluation Framework
 
-A bias-free, consistent methodology for evaluating software developers and engineering managers using Claude Code agents.
+A bias-aware, consistent methodology for evaluating software developers and engineering managers using Claude Code agents.
 
 ---
 
