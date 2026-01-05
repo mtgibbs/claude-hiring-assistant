@@ -1,0 +1,90 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# macOS thumbnails
+._*
+
+# macOS directories
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.cursor/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Node modules (if any future tooling is added)
+node_modules/
+
+# Python cache (if any future tooling is added)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment files (if any future tooling is added)
+.env
+.env.local
+
+# ===========================================
+# PRIVACY PROTECTION - HIRING DATA
+# ===========================================
+
+# Organization-specific data (all org config, matrices, rubrics)
+.org/*
+# Keep the example template
+!.org/example/
+
+# Legacy: Configuration (contains org-specific settings)
+config/config.yaml
+
+# All candidate data
+resumes/
+evaluations/
+decisions/
+reports/
+
+# Keep folder structure markers
+!resumes/.gitkeep
+!resumes/developers/.gitkeep
+!resumes/developers/new/.gitkeep
+!resumes/managers/.gitkeep
+!resumes/managers/new/.gitkeep
+!evaluations/.gitkeep
+!evaluations/developers/.gitkeep
+!evaluations/managers/.gitkeep
+!decisions/.gitkeep
+!reports/.gitkeep
+
+# Transcripts and recordings
+*.vtt
+*.srt
+*.mp3
+*.mp4
+*.wav
+*.m4a
+
+# Company-specific files
+VACANCY_CODES.md
+AGENTS.md
+CLAUDE-ORIGINAL.md
+
+# Temporary processing files
+tmp/
+
+# Any candidate comparison files
+CANDIDATE_COMPARISON.md

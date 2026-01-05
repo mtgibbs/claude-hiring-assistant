@@ -1,0 +1,144 @@
+# Hiring Evaluation Framework Configuration
+# Copy this file to config.yaml and customize for your organization
+# This file is gitignored and should not be committed
+
+# Organization settings
+organization:
+  name: "Your Company Name"
+
+# Role level definitions
+# Customize these to match your organization's leveling system
+role_levels:
+  ic:
+    - code: "L1"
+      name: "Software Engineer"
+      subfolder: "Software Engineer (L1)"
+      years_experience: "0-2"
+      expectations: "Learning, needs guidance, basic implementations"
+    - code: "L2"
+      name: "Senior Software Engineer"
+      subfolder: "Senior Software Engineer (L2)"
+      years_experience: "2-5"
+      expectations: "Independent, owns features, mentors juniors"
+    - code: "L3"
+      name: "Lead Software Engineer"
+      subfolder: "Lead Software Engineer (L3)"
+      years_experience: "5-8"
+      expectations: "Technical leadership, architecture decisions, cross-team influence"
+    - code: "L4"
+      name: "Staff Software Engineer"
+      subfolder: "Staff Software Engineer (L4)"
+      years_experience: "8+"
+      expectations: "Org-wide technical direction, complex system design"
+
+  manager:
+    - code: "M1"
+      name: "Engineering Manager"
+      subfolder: "Engineering Manager"
+      team_size: "5-8"
+      expectations: "Single team management, hiring, performance"
+    - code: "M2"
+      name: "Senior Engineering Manager"
+      subfolder: "Senior Engineering Manager"
+      team_size: "10-20"
+      expectations: "Multiple teams, cross-functional leadership"
+    - code: "M3"
+      name: "Director"
+      subfolder: "Director"
+      team_size: "20+"
+      expectations: "Organizational strategy, multi-team leadership"
+
+# Scoring thresholds for evaluations
+# Adjust these based on your quality bar
+thresholds:
+  ic:
+    max_score: 35
+    categories: 7
+    # Action thresholds
+    exceptional: 32      # 91%+ - Fast track to interview
+    strong: 28           # 80%+ - Recommend interview
+    acceptable: 24       # 68%+ - Interview if pipeline allows
+    borderline: 20       # 57%+ - Consider for lower level
+    # Below borderline = reject
+
+  manager:
+    max_score: 50
+    categories: 10
+    # Action thresholds
+    exceptional: 45      # 90%+ - Fast track to interview
+    strong: 40           # 80%+ - Recommend interview
+    acceptable: 32       # 64%+ - Interview with caution
+    borderline: 26       # 52%+ - Consider for lower level
+    # Below borderline = reject
+
+  interview:
+    max_score: 65        # For IC interviews
+    manager_max_score: 55  # For manager interviews
+    pass: 0.70           # 70% minimum to pass
+
+# Directory paths (relative to project root)
+paths:
+  rubrics: "rubrics/"
+  resumes:
+    developers_new: "resumes/developers/new/"
+    developers_processed: "resumes/developers/processed/"
+    managers_new: "resumes/managers/new/"
+    managers_processed: "resumes/managers/processed/"
+  evaluations:
+    developers: "evaluations/developers/"
+    managers: "evaluations/managers/"
+  interviews: "interviews/"
+  decisions: "decisions/"
+  examples: "examples/"
+
+# Regional context configuration
+# Enable regional advisors for candidates from specific regions
+regional:
+  enabled: true
+  contexts:
+    india:
+      enabled: true
+      context_file: "config/regional/india_context.md"
+      triggers:
+        - "india"
+        - "bangalore"
+        - "hyderabad"
+        - "chennai"
+        - "pune"
+        - "mumbai"
+        - "delhi"
+        - "noida"
+        - "gurgaon"
+    # Add more regions as needed:
+    # latam:
+    #   enabled: false
+    #   context_file: "config/regional/latam_context.md"
+    #   triggers:
+    #     - "brazil"
+    #     - "mexico"
+    #     - "argentina"
+
+# Technology stack priorities (optional)
+# Used for scoring alignment with your stack
+tech_stack:
+  primary:
+    - ".NET"
+    - "C#"
+    - "TypeScript"
+    - "React"
+    - "Azure"
+  secondary:
+    - "Node.js"
+    - "Python"
+    - "AWS"
+    - "Docker"
+    - "Kubernetes"
+
+# Interview configuration
+interview:
+  # Minimum questions to ask per category
+  min_questions_per_category: 2
+  # Enable ticket jockey detection for manager candidates
+  ticket_jockey_detection: true
+  # Require specific examples (not hypothetical answers)
+  require_specifics: true

@@ -1,0 +1,332 @@
+# Organization Configuration
+# This file contains all organization-specific settings
+# Located in .org/[org-name]/ (gitignored)
+
+organization:
+  name: "Your Company Name"
+
+# Internal grade/level system
+# Define your organization's internal leveling structure
+internal_levels:
+  ic:
+    - grade: "G5"
+      title: "Software Engineer"
+      experience: "0-4 years"
+      hiring_status: "not_hiring"
+      description: "Entry level, learning fundamentals, needs guidance"
+    - grade: "G6"
+      title: "Senior Software Engineer"
+      experience: "2-6 years"
+      hiring_status: "hiring"
+      description: "Independent contributor, domain expertise growing, owns features"
+    - grade: "G7"
+      title: "Staff Software Engineer"
+      experience: "4+ years"
+      hiring_status: "hiring"
+      description: "Domain expert, full project ownership, organizational influence"
+
+  manager:
+    - grade: "G7"
+      title: "Technology Manager"
+      experience: "3-5 years management"
+      hiring_status: "hiring"
+      description: "First-line manager, single team, hiring and performance"
+    - grade: "G8"
+      title: "Senior Technology Manager"
+      experience: "5-8 years management"
+      hiring_status: "hiring"
+      description: "Multi-team leadership, strategic planning, organizational changes"
+
+# Role level definitions (for hiring)
+# Maps external hiring roles to internal grades
+role_levels:
+  ic:
+    - code: "L1"
+      name: "Software Engineer"
+      subfolder: "Software Engineer (L1)"
+      internal_grade: "G5"
+      years_experience: "0-2"
+      expectations: "Learning, needs guidance, basic implementations"
+    - code: "L2"
+      name: "Senior Software Engineer"
+      subfolder: "Senior Software Engineer (L2)"
+      internal_grade: "G6"
+      years_experience: "2-5"
+      expectations: "Independent, owns features, mentors juniors"
+    - code: "L3"
+      name: "Lead Software Engineer"
+      subfolder: "Lead Software Engineer (L3)"
+      internal_grade: "G7"
+      years_experience: "5-8"
+      expectations: "Technical leadership, architecture decisions, cross-team influence"
+    - code: "L4"
+      name: "Staff Software Engineer"
+      subfolder: "Staff Software Engineer (L4)"
+      internal_grade: "G7"
+      years_experience: "8+"
+      expectations: "Org-wide technical direction, complex system design"
+
+  manager:
+    - code: "M1"
+      name: "Engineering Manager"
+      subfolder: "Engineering Manager"
+      internal_grade: "G7"
+      team_size: "5-8"
+      expectations: "Single team management, hiring, performance"
+    - code: "M2"
+      name: "Senior Engineering Manager"
+      subfolder: "Senior Engineering Manager"
+      internal_grade: "G8"
+      team_size: "10-20"
+      expectations: "Multiple teams, cross-functional leadership"
+    - code: "M3"
+      name: "Director"
+      subfolder: "Director"
+      internal_grade: "G8"
+      team_size: "20+"
+      expectations: "Organizational strategy, multi-team leadership"
+
+# Competency matrix dimensions
+# Define the dimensions used to evaluate candidates at each level
+competency_matrices:
+  ic:
+    dimensions:
+      - name: "Technical Scope"
+        question: "Am I building knowledge about our problem space and recognized as an expert?"
+        weight: 1.0
+      - name: "Execution"
+        question: "Do I execute within my role and deliver high quality results?"
+        weight: 1.0
+      - name: "Communication"
+        question: "Do I communicate effectively at all levels and does my influence reach the entire organization?"
+        weight: 1.0
+      - name: "Team Leadership"
+        question: "Do I uplevel my team and actively encourage a culture of growth?"
+        weight: 1.0
+      - name: "Vision and Growth"
+        question: "How do I improve as an individual? How do I work with a big picture mindset?"
+        weight: 1.0
+
+    levels:
+      G5:
+        technical_scope:
+          - "Debugs small/medium sized issues, fixes bugs"
+          - "Implements small features"
+          - "Reviews teammates' code"
+          - "Provides recommendations and options to senior engineers"
+          - "Develops the skills required to build and ship software"
+        execution:
+          - "Accomplishes tasks given, receives guidance and mentoring as needed"
+          - "Achieves a balance of independent execution and seeking guidance"
+          - "Proactively surfaces questions and concerns to peers while learning"
+        communication:
+          - "Communicates with kindness and consideration"
+          - "Articulates needs for feedback and direction"
+          - "Regularly contributes to planning and technical discussions"
+        team_leadership:
+          - "Openly shares opinions and contributes to discussions"
+          - "Is open to changing perspective and plans based on input"
+          - "Provides thoughtful and constructive feedback"
+          - "May participate in interviews as a shadow"
+        vision_and_growth:
+          - "Learns from team members and documentation"
+          - "Can articulate how their work fits into broader team vision (with support)"
+
+      G6:
+        technical_scope:
+          - "Debugs and fixes moderately complex bugs"
+          - "Becoming a domain subject matter expert"
+          - "Implements medium/large features"
+          - "Reviews teammates' code for quality and opportunities"
+          - "Understands high-level design of software"
+        execution:
+          - "Exercises independent judgment within team practices"
+          - "Addresses unforeseen circumstances and makes recommendations"
+          - "Shows complete ownership of work assignments"
+          - "Takes part in interviews and onboarding"
+        communication:
+          - "Starts and guides synchronous collaboration (e.g., pairing)"
+          - "Fosters collaborative discussions within team"
+          - "Ensures discussions are inclusive of feedback"
+        team_leadership:
+          - "Surfaces information, analysis, and recommendations"
+          - "Proactively provides feedback to management and peers"
+          - "Leads small teams/projects under guidance"
+        vision_and_growth:
+          - "Reflects on feedback and incorporates it"
+          - "Can articulate how team's work fits into broader vision"
+          - "Has expanded knowledge outside day-to-day team"
+
+      G7:
+        technical_scope:
+          - "Designs and implements high-importance or multi-phase projects"
+          - "Debugs complex issues"
+          - "Delegates work to other engineers"
+          - "Is a domain subject matter expert"
+        execution:
+          - "Responsible for full project delivery including process and documentation"
+          - "Proposes and executes work, adapts to feedback, makes tradeoffs"
+          - "Understands larger ecosystem and impact of changes"
+        communication:
+          - "Proactively communicates issues, status, milestones"
+          - "Uses influence to introduce new collaboration practices"
+          - "Works closely with engineering leaders to spread knowledge"
+        team_leadership:
+          - "Pioneers engineering best practices across org"
+          - "Unblocks and propels team productivity"
+          - "Mentors engineers across org"
+          - "Advocates for and coaches team members"
+        vision_and_growth:
+          - "Participates in vision creation and advocates improvements"
+          - "Inspires others by connecting work to company vision"
+          - "Keeps open mind despite experience"
+          - "Seeks diverse perspectives and disconfirms biases"
+
+  manager:
+    dimensions:
+      - name: "Scope & Management Impact"
+        question: "What is the breadth of my responsibility and influence?"
+        weight: 1.0
+      - name: "Communication"
+        question: "How effectively do I communicate across all levels of the organization?"
+        weight: 1.0
+      - name: "Systems Thinking"
+        question: "Do I understand and anticipate the broader impact of decisions?"
+        weight: 1.0
+      - name: "Execution and Delivery"
+        question: "How effectively do I drive results and remove blockers?"
+        weight: 1.0
+      - name: "Growth Mindset"
+        question: "How do I develop myself and embrace change?"
+        weight: 1.0
+      - name: "Building & Optimizing Teams"
+        question: "How do I build, develop, and optimize high-performing teams?"
+        weight: 1.0
+
+    levels:
+      G7:
+        scope_and_management_impact:
+          - "Sets and manages expectations at a broader scale and complexity"
+          - "Course corrects as needed"
+          - "Provides regular feedback and manages performance concerns"
+          - "Participates in headcount planning; responsible for hiring and developing team members"
+        communication:
+          - "Skilled at communicating strategy and vision; inspires team members"
+          - "Interacts and collaborates with stakeholders across departments and externally"
+          - "Listens attentively, understands concerns, and provides constructive feedback"
+          - "Transparent and open in communication, including project and organizational updates"
+        systems_thinking:
+          - "Identifies all dependencies in the system when considering work or direction"
+          - "Anticipates impact of team's work and articulates it to senior management and engineers"
+          - "Coaches others to distill complex problems into simpler components"
+          - "Understands and empathizes with team members' perspectives and challenges"
+        execution_and_delivery:
+          - "Leverages diverse data points to inform decisions"
+          - "Removes blockers once dependencies are identified"
+          - "Demonstrates consistent delivery of large projects; iteratively builds stakeholder trust"
+          - "Understands direction and speed needed for effective outcomes"
+        growth_mindset:
+          - "Self-aware and understands areas of development"
+          - "Adapts quickly to changes; implements thoughtful change initiatives"
+          - "Actively seeks feedback from team, peers, and superiors"
+          - "Delivers hard feedback when needed"
+        building_and_optimizing_teams:
+          - "Identifies when to delegate and when to step in"
+          - "Identifies tensions in operating structures and proposes solutions"
+          - "Forecasts and identifies headcount needs"
+          - "Mentors team members in setting ambitious career goals and connects them with opportunities"
+
+      G8:
+        scope_and_management_impact:
+          - "Participates in strategic planning with senior leaders"
+          - "Has control over planning, hiring, and implementing organizational changes"
+          - "Aligns day-to-day execution with top objectives"
+          - "Leads through other managers, orchestrating success across teams"
+        communication:
+          - "Communicates strategically, aligning with organizational goals"
+          - "Breaks down complex concepts for diverse audiences"
+          - "Actively listens and seeks to understand others' perspectives"
+          - "Communicates effectively with executives, clients, and cross-functional teams"
+        systems_thinking:
+          - "Understands downstream effects of actions across groups"
+          - "Anticipates unintended consequences and course corrects"
+          - "Builds processes and workflows that simplify team operations"
+          - "Extrapolates core tenets of complex challenges and explains them clearly"
+        execution_and_delivery:
+          - "Uses pragmatic thinking to align goals with achievable targets"
+          - "Efficiently drives outcomes aligned with strategic goals"
+          - "Critically prioritizes high-impact work and drives outcomes with speed"
+          - "Resolves conflicts constructively and teaches others to coach through complex situations"
+        growth_mindset:
+          - "Cultivates a culture of open feedback and uses it to refine leadership"
+          - "Demonstrates curiosity to build trust and improve decision quality"
+          - "Sees change as opportunity; proactively manages change with contingency plans"
+          - "Encourages experimentation and treats failures as learning opportunities"
+        building_and_optimizing_teams:
+          - "Inspires and motivates teams"
+          - "Identifies high performers and future leaders; proactively develops them"
+          - "Solid behavioral interviewer; identifies high-quality talent"
+          - "Delegates to provide growth opportunities and coaches for effective outcomes"
+          - "Proactively checks in on team morale and cohesion"
+
+# Scoring thresholds for evaluations
+thresholds:
+  ic:
+    max_score: 35
+    categories: 7
+    exceptional: 32      # 91%+ - Fast track to interview
+    strong: 28           # 80%+ - Recommend interview
+    acceptable: 24       # 68%+ - Interview if pipeline allows
+    borderline: 20       # 57%+ - Consider for lower level
+
+  manager:
+    max_score: 50
+    categories: 10
+    exceptional: 45      # 90%+ - Fast track to interview
+    strong: 40           # 80%+ - Recommend interview
+    acceptable: 32       # 64%+ - Interview with caution
+    borderline: 26       # 52%+ - Consider for lower level
+
+  interview:
+    max_score: 65
+    manager_max_score: 55
+    pass: 0.70
+
+# Technology stack priorities
+tech_stack:
+  primary:
+    - ".NET"
+    - "C#"
+    - "TypeScript"
+    - "React"
+    - "Azure"
+  secondary:
+    - "Node.js"
+    - "Python"
+    - "AWS"
+    - "Docker"
+    - "Kubernetes"
+
+# Regional context configuration
+regional:
+  enabled: true
+  contexts:
+    india:
+      enabled: true
+      context_file: "regional/india_context.md"  # Relative to .org/[name]/
+      triggers:
+        - "india"
+        - "bangalore"
+        - "hyderabad"
+        - "chennai"
+        - "pune"
+        - "mumbai"
+        - "delhi"
+        - "noida"
+        - "gurgaon"
+
+# Interview configuration
+interview:
+  min_questions_per_category: 2
+  ticket_jockey_detection: true
+  require_specifics: true
