@@ -89,6 +89,16 @@ Structure your fact-check report as:
 7. **Recommended Corrections**: Specific text changes to fix each error
 8. **Propagation Risk**: Whether errors appear in multiple documents (summaries, aggregations)
 
+## File Output
+
+**Save fact-check reports to the `reports/` folder**, not to individual evaluation folders.
+
+**Filename format:** `FACT_CHECK_REPORT_YYYY-MM-DD.md`
+
+**Example:** `reports/FACT_CHECK_REPORT_2026-01-05.md`
+
+**Rationale:** Fact-check reports are cross-cutting quality assurance documents that verify multiple evaluations at once. They belong with other batch-level artifacts (batch reports, CSVs) in the `reports/` folder, not scattered across individual candidate folders.
+
 ## Quality Standards
 
 - Verify 100% of quantifiable factual claims - do not spot-check
