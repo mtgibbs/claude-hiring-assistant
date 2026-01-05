@@ -12,7 +12,7 @@ Run the standardized interview assessment workflow on all candidates with interv
 After conducting interviews, drop notes into the candidate's evaluation folder:
 
 ```
-evaluations/developers/2024-01-15_✅_john-doe_28-35/
+evaluations/developers/2024-01-15_⭐_john-doe_32-35/
 ├── john-doe-evaluation.md      # Resume evaluation (already exists)
 ├── HR_SUMMARY_RESUME.md        # Resume HR summary (already exists)
 ├── john-doe-resume.pdf         # Resume (already exists)
@@ -81,7 +81,7 @@ Summarize:
 Each assessed candidate folder will contain:
 
 ```
-evaluations/developers/2024-01-15_✅_john-doe_28-35/
+evaluations/developers/2024-01-15_⭐_john-doe_32-35/
 ├── john-doe-evaluation.md      # Resume evaluation
 ├── HR_SUMMARY_RESUME.md        # Resume HR summary
 ├── john-doe-resume.pdf         # Resume
@@ -103,10 +103,10 @@ Results:
 - No Hire: 1 (Bob Wilson)
 
 Files created:
-- evaluations/developers/2024-01-15_✅_john-doe_28-35/INTERVIEW_ASSESSMENT.md
-- evaluations/developers/2024-01-15_✅_john-doe_28-35/HR_SUMMARY_INTERVIEW.md
-- evaluations/developers/2024-01-16_⚠️_jane-smith_22-35/INTERVIEW_ASSESSMENT.md
-- evaluations/developers/2024-01-16_⚠️_jane-smith_22-35/HR_SUMMARY_INTERVIEW.md
-- evaluations/managers/2024-01-15_❌_bob-wilson_20-50/INTERVIEW_ASSESSMENT.md
-- evaluations/managers/2024-01-15_❌_bob-wilson_20-50/HR_SUMMARY_INTERVIEW.md
+- evaluations/developers/2024-01-15_⭐_john-doe_32-35/INTERVIEW_ASSESSMENT.md
+- evaluations/developers/2024-01-15_⭐_john-doe_32-35/HR_SUMMARY_INTERVIEW.md
+- evaluations/developers/2024-01-16_✅_jane-smith_25-35/INTERVIEW_ASSESSMENT.md
+- evaluations/developers/2024-01-16_✅_jane-smith_25-35/HR_SUMMARY_INTERVIEW.md
+- evaluations/managers/2024-01-15_⚠️_bob-wilson_28-50/INTERVIEW_ASSESSMENT.md
+- evaluations/managers/2024-01-15_⚠️_bob-wilson_28-50/HR_SUMMARY_INTERVIEW.md
 ```

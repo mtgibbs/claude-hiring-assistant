@@ -196,9 +196,10 @@ The following files are **templates** intended for other users of this framework
 │           └── [Grade Subfolder]/
 ├── evaluations/                 # All evaluations (gitignored)
 │   ├── developers/
-│   │   ├── 2024-01-15_✅_john-doe_28-35/      # ✅ Interview (68%+)
-│   │   ├── 2024-01-16_⚠️_jane-smith_22-35/    # ⚠️ Borderline (57-67%)
-│   │   └── 2024-01-17_❌_bob-wilson_15-35/     # ❌ No Match (<57%)
+│   │   ├── 2024-01-15_⭐_john-doe_32-35/      # ⭐ Strong/Exceptional (80%+)
+│   │   ├── 2024-01-16_✅_jane-smith_25-35/    # ✅ Interview (68-79%)
+│   │   ├── 2024-01-17_⚠️_bob-wilson_22-35/    # ⚠️ Borderline (57-67%)
+│   │   └── 2024-01-18_❌_alex-jones_15-35/    # ❌ No Match (<57%)
 │   │       ├── [name]-evaluation.md
 │   │       ├── HR_SUMMARY_RESUME.md
 │   │       ├── INTERVIEW_ASSESSMENT.md (after interview)

@@ -118,9 +118,10 @@ This runs the complete workflow:
 │   └── managers/new/[Level]/
 ├── evaluations/                 # Generated evaluations (gitignored)
 │   └── developers/
-│       ├── 2024-01-15_✅_john-doe_28-35/     # ✅ = Interview
-│       ├── 2024-01-16_⚠️_jane-smith_22-35/   # ⚠️ = Borderline
-│       └── 2024-01-17_❌_bob-wilson_15-35/    # ❌ = Does Not Meet Threshold
+│       ├── 2024-01-15_⭐_john-doe_32-35/     # ⭐ = Strong/Exceptional (Fast Track)
+│       ├── 2024-01-16_✅_jane-smith_25-35/   # ✅ = Interview
+│       ├── 2024-01-17_⚠️_bob-wilson_22-35/   # ⚠️ = Borderline
+│       └── 2024-01-18_❌_alex-jones_15-35/   # ❌ = Does Not Meet Threshold
 ├── reports/                     # Batch reports & CSV (gitignored)
 ├── .claude/
 │   ├── agents/                  # All evaluation agents
@@ -298,7 +299,7 @@ Contributions welcome! Please:
 
 ## License
 
-[Your License Here]
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 

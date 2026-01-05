@@ -80,15 +80,16 @@ Processed: 5 resumes
 - Managers: 2 (1 EM, 1 Director)
 
 Results:
-- ✅ Interview: 4
+- ⭐ Strong/Exceptional: 2
+- ✅ Interview: 2
 - ⚠️ Borderline: 1
 - ❌ Reject: 0
 
 Evaluations created:
-- evaluations/developers/2024-01-15_✅_john-doe_28-35/
+- evaluations/developers/2024-01-15_⭐_john-doe_32-35/
 - evaluations/developers/2024-01-15_✅_jane-smith_26-35/
 - evaluations/developers/2024-01-15_⚠️_bob-wilson_22-35/
-- evaluations/managers/2024-01-15_✅_alice-johnson_42-50/
+- evaluations/managers/2024-01-15_⭐_alice-johnson_45-50/
 - evaluations/managers/2024-01-15_✅_charlie-brown_38-50/
 
 Reports:
