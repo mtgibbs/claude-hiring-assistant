@@ -222,14 +222,16 @@ Format: `YYYY-MM-DD_[emoji]_[candidate-name]_[score]-[max]/`
 **Status Emoji:**
 | Emoji | IC (35 pts) | Manager (50 pts) | Meaning |
 |-------|-------------|------------------|---------|
-| ✅ | 68%+ (24+) | 64%+ (32+) | Interview |
+| ⭐ | 80%+ (28+) | 80%+ (40+) | Strong/Exceptional - Fast Track |
+| ✅ | 68-79% (24-27) | 64-79% (32-39) | Interview |
 | ⚠️ | 57-67% (20-23) | 52-63% (26-31) | Borderline |
 | ❌ | <57% (<20) | <52% (<26) | No Match |
 
 **Examples:**
-- `2024-01-15_✅_john-doe_28-35/`
-- `2024-01-15_⚠️_jane-smith_22-35/`
-- `2024-01-15_❌_bob-wilson_15-35/`
+- `2024-01-15_⭐_john-doe_32-35/`
+- `2024-01-15_✅_jane-smith_25-35/`
+- `2024-01-15_⚠️_bob-wilson_22-35/`
+- `2024-01-15_❌_alex-jones_15-35/`
 
 **Rules:**
 - **ALWAYS** include emoji and score for at-a-glance status

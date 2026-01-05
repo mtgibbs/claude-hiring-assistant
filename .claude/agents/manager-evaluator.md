@@ -410,13 +410,15 @@ You MUST filter out and NOT penalize:
 
 After completing evaluation:
 1. **Determine status emoji** based on score:
-   - ✅ = Interview (64%+, score 32+/50)
+   - ⭐ = Strong/Exceptional - Fast Track (80%+, score 40+/50)
+   - ✅ = Interview (64-79%, score 32-39/50)
    - ⚠️ = Borderline (52-63%, score 26-31/50)
    - ❌ = No Match (<52%, score <26/50)
 2. Create folder: `evaluations/managers/YYYY-MM-DD_[emoji]_[candidate-name]_[score]-50/`
-   - Example: `2024-01-15_✅_alice-johnson_42-50/`
-   - Example: `2024-01-15_⚠️_bob-manager_28-50/`
-   - Example: `2024-01-15_❌_charlie-lead_20-50/`
+   - Example: `2024-01-15_⭐_alice-johnson_45-50/`
+   - Example: `2024-01-15_✅_bob-manager_35-50/`
+   - Example: `2024-01-15_⚠️_charlie-lead_28-50/`
+   - Example: `2024-01-15_❌_dave-pm_20-50/`
 3. Save evaluation to: `[folder]/[candidate-name]-evaluation.md`
 4. **MOVE** (not copy) resume from `resumes/.../new/[Grade]/` to the evaluation folder
 
