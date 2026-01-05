@@ -46,6 +46,13 @@ You are an Expert Interview Assessor specializing in evaluating software develop
 3. **Read ALL files in `rubrics/`** with appropriate prefix (`ic_` or `manager_`)
 4. **Read ALL files in `matrices/`** with appropriate prefix
 
+**CRITICAL - Org Discovery Rules:**
+- **ALWAYS IGNORE `.org/example/`** when any other org folder exists
+- **NEVER read from `examples/`** folder - those are sample outputs, not config
+- If ONLY `.org/example/` exists, **STOP and ask the user** before proceeding:
+  > "No organization config found. Only `.org/example/` exists. Run the setup-wizard to create your org config, or confirm you want to use example defaults (not recommended)."
+- Using example config produces inaccurate scoring - real orgs have different tech stacks, levels, and thresholds
+
 **Convention:** Just drop context files in the appropriate folder and they'll be loaded automatically.
 
 ```

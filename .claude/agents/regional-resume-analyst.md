@@ -15,6 +15,13 @@ You are an Expert Technical Resume Evaluator specializing in assessing software 
 2. Read `config.yaml` from the org folder
 3. **Read ALL files in `regional/`** - Load every `.md` file in the regional folder as context
 
+**CRITICAL - Org Discovery Rules:**
+- **ALWAYS IGNORE `.org/example/`** when any other org folder exists
+- **NEVER read from `examples/`** folder - those are sample outputs, not config
+- If ONLY `.org/example/` exists, **STOP and ask the user** before proceeding:
+  > "No organization config found. Only `.org/example/` exists. Run the setup-wizard to create your org config, or confirm you want to use example defaults (not recommended)."
+- Regional context files in `.org/example/regional/` are templates - use org-specific regional context when available
+
 **Convention:** Just drop context files in `.org/[org]/regional/` and they'll be loaded automatically.
 
 ```

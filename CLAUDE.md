@@ -35,6 +35,28 @@ Organization-specific data lives in `.org/[org-name]/` (gitignored). **Conventio
 2. Edit files in `.org/my-company/` as needed
 3. Agents automatically discover first non-example folder in `.org/`
 
+### Org Discovery Rules (CRITICAL)
+
+**When loading organization config, agents MUST follow this order:**
+
+1. **Scan `.org/` for folders** - List all directories in `.org/`
+2. **ALWAYS IGNORE `.org/example/`** when any other folder exists
+3. **Use the first non-example folder** (e.g., `.org/onedatascan/`, `.org/mycompany/`)
+4. **If ONLY `.org/example/` exists** → STOP and ask the user:
+   > "No organization-specific configuration found. Only the example template exists at `.org/example/`. Would you like to:
+   > 1. Run the `setup-wizard` to create your organization config
+   > 2. Proceed using example defaults (not recommended for real evaluations)"
+
+**Why this matters:**
+- `.org/example/` contains generic templates with placeholder values
+- Real evaluations require org-specific rubrics, levels, and tech stack
+- Using example config will produce inaccurate scoring and recommendations
+
+**Never:**
+- Load rubrics/matrices from `.org/example/` when another org folder exists
+- Silently fall back to example config
+- Mix files from example and org-specific folders
+
 ### Config Contents (config.yaml)
 - **internal_levels**: Your organization's internal grade system (G5, G6, G7, etc.)
 - **role_levels**: External hiring roles mapped to internal grades
