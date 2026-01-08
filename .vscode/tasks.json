@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Setup: Validate Configuration",
+      "type": "shell",
+      "command": "echo '=== Validating Hiring Framework Setup ===' && echo '' && ls -la .org 2>/dev/null || echo '✗ .org/ folder missing' && echo '' && ls -la resumes 2>/dev/null || echo '✗ resumes/ folder missing' && echo '' && ls -la evaluations 2>/dev/null || echo '⚠ evaluations/ will be created automatically'",
+      "problemMatcher": []
+    },
+    {
+      "label": "Setup: Create Organization Folder",
+      "type": "shell",
+      "command": "echo 'To create your org folder, use Copilot Chat:' && echo '' && echo '  \"Set up the framework for my organization\"' && echo '' && echo 'Or manually: cp -r .org/example .org/mycompany'",
+      "problemMatcher": []
+    },
+    {
+      "label": "Resumes: List Pending",
+      "type": "shell",
+      "command": "echo '=== Pending Resumes ===' && find resumes -path '*/new/*' -type f 2>/dev/null || echo 'No pending resumes'",
+      "problemMatcher": []
+    },
+    {
+      "label": "Resumes: Create Folders",
+      "type": "shell",
+      "command": "mkdir -p resumes/developers/new resumes/developers/processed resumes/managers/new resumes/managers/processed && echo '✓ Created resume folders'",
+      "problemMatcher": []
+    },
+    {
+      "label": "Reports: List Evaluations",
+      "type": "shell",
+      "command": "echo '=== Recent Evaluations ===' && ls -1 evaluations/developers 2>/dev/null | head -10 || echo 'No evaluations yet'",
+      "problemMatcher": []
+    },
+    {
+      "label": "Copilot: Quick Guide",
+      "type": "shell",
+      "command": "echo '=== Quick Copilot Commands ===' && echo '' && echo 'SETUP:' && echo '  \"Set up the framework\"' && echo '' && echo 'RESUME EVALUATION:' && echo '  \"Evaluate this resume\"' && echo '  \"Process new resumes\"' && echo '' && echo 'INTERVIEW:' && echo '  \"Prepare interview for [name]\"' && echo '  \"Assess interview for [name]\"' && echo '' && echo 'REPORTING:' && echo '  \"Compare candidates\"' && echo '  \"Generate batch report\"' && echo '' && echo 'Use Ctrl+I or Cmd+I to open Copilot Chat'",
+      "problemMatcher": []
+    },
+    {
+      "label": "Help: Open Documentation",
+      "type": "shell",
+      "command": "code docs/GETTING_STARTED.md && code CLAUDE.md && code .github/copilot-instructions.md",
+      "problemMatcher": []
+    }
+  ]
+}

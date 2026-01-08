@@ -2,11 +2,60 @@
 
 This guide walks you through setting up the Hiring Evaluation Framework for your organization.
 
+**This framework works with:**
+- **Claude Code CLI** (original)
+- **VS Code + GitHub Copilot**
+
+---
+
+## Table of Contents
+
+1. [Core Documentation](#core-documentation)
+2. [Prerequisites](#prerequisites)
+3. [Quick Start (5 minutes)](#quick-start-5-minutes)
+   - [1. Create Your Configuration](#1-create-your-configuration)
+   - [2. Create Your Rubrics](#2-create-your-rubrics)
+   - [3. Set Up Resume Folders](#3-set-up-resume-folders)
+   - [4. Start Evaluating](#4-start-evaluating)
+4. [Detailed Setup](#detailed-setup)
+   - [Configuration Deep Dive](#configuration-deep-dive)
+   - [Rubric Customization](#rubric-customization)
+   - [Regional Context](#regional-context)
+5. [Workflow Overview](#workflow-overview)
+   - [Resume Evaluation Flow](#resume-evaluation-flow)
+   - [Interview Flow](#interview-flow)
+   - [Comparison Flow](#comparison-flow)
+6. [Common Commands](#common-commands)
+7. [File Organization](#file-organization)
+8. [Tips](#tips)
+   - [Setting Your Quality Bar](#setting-your-quality-bar)
+   - [Calibrating Scores](#calibrating-scores)
+   - [Cultural Considerations](#cultural-considerations)
+9. [Need Help?](#need-help)
+
+---
+
+## Core Documentation
+
+**Architecture:** This framework uses a shared methodology approach:
+- **[AI.md](../AI.md)** 🎯 **SHARED FOUNDATION** - All evaluation logic, scoring rubrics, agent personas (read this first!)
+- **[CLAUDE.md](../CLAUDE.md)** - How Claude Code CLI implements AI.md (agent dispatch, commands)
+- **[.github/copilot-instructions.md](../.github/copilot-instructions.md)** - How GitHub Copilot implements AI.md (tool mappings)
+- **[config/schema.md](../config/schema.md)** - Configuration options reference
+
+> Both providers reference AI.md for all evaluation decisions, ensuring no drift between tools.
+
 ---
 
 ## Prerequisites
 
+**For Claude Code CLI:**
 - [Claude Code CLI](https://github.com/anthropics/claude-code) installed
+- Git repository cloned locally
+
+**For VS Code + GitHub Copilot:**
+- [VS Code](https://code.visualstudio.com/) installed
+- [GitHub Copilot](https://github.com/features/copilot) extension enabled
 - Git repository cloned locally
 
 ---
@@ -15,8 +64,27 @@ This guide walks you through setting up the Hiring Evaluation Framework for your
 
 ### 1. Create Your Configuration
 
+**Using the setup wizard (recommended):**
+
+**Claude Code CLI:**
+```
+Run the setup wizard
+```
+
+**VS Code + Copilot:**
+Say "Set up the framework for my organization" in Copilot Chat (Ctrl+I or Cmd+I)
+
+The wizard will:
+- Create `.org/your-org-name/` folder
+- Copy templates from `.org/example/`
+- Guide you through configuration
+- Set up role levels and thresholds
+
+**Manual alternative:**
 ```bash
-cp config/config.yaml.example config/config.yaml
+cp -r .org/example .org/your-org-name
+cd .org/your-org-name
+# Edit config.yaml, rubrics/, matrices/
 ```
 
 Edit `config/config.yaml` to customize:
@@ -27,15 +95,21 @@ Edit `config/config.yaml` to customize:
 
 ### 2. Create Your Rubrics
 
-```bash
-# For IC (developer) roles
-cp rubrics/templates/ic_rubric_template.md rubrics/developers/EVALUATION_RUBRIC.md
 
-# For manager roles
-cp rubrics/templates/manager_rubric_template.md rubrics/managers/MANAGER_EVALUATION_RUBRIC.md
+The setup wizard handles this automatically, or you can manually customize:
+
+```bash
+# After copying .org/example to .org/your-org-name
+cd .org/your-org-name/rubrics/
+
+# Customize IC rubrics (any file starting with ic_*)
+# Edit ic_rubric.md - define your IC scoring criteria
+
+# Customize manager rubrics (any file starting with manager_*)  
+# Edit manager_rubric.md - define your manager scoring criteria
 ```
 
-Edit each rubric to define your scoring criteria for each category.
+**Convention:** Files prefixed with `ic_*` auto-load for IC evaluations, `manager_*` for manager evaluations.
 
 ### 3. Set Up Resume Folders
 
@@ -59,8 +133,7 @@ mkdir -p resumes/managers/processed
 ### 4. Start Evaluating
 
 1. Place resume PDFs in the appropriate `resumes/.../new/[role-level]/` folder
-2. Open Claude Code in the project directory
-3. Say: "Process new resumes"
+2. Say: "Process new resumes"
 
 ---
 
@@ -68,7 +141,9 @@ mkdir -p resumes/managers/processed
 
 ### Configuration Deep Dive
 
-See `config/schema.md` for complete documentation of all configuration options.
+**All organization-specific config lives in `.org/your-org-name/`** (gitignored)
+
+See [config/schema.md](../config/schema.md) for complete documentation.
 
 **Key settings to customize:**
 
@@ -98,13 +173,17 @@ thresholds:
 
 ### Rubric Customization
 
+**Rubrics live in `.org/your-org-name/rubrics/`**
+
+**Convention:** Files prefixed with `ic_*` load for IC evaluations, `manager_*` for managers
+
 Each rubric category should have:
 - **Clear criteria** for each score level (5=exceptional through 0=absent)
 - **What to look for** - signals of quality
 - **What to ignore** - cultural differences, formatting
 - **Red flags** - warning signs
 
-Example:
+Example from `.org/your-org/rubrics/ic_rubric.md`:
 
 ```markdown
 ## Category 1: Technical Stack Alignment (0-5)
@@ -127,7 +206,7 @@ Example:
 
 If you hire from specific regions, configure regional advisors:
 
-1. Enable in config.yaml:
+1. Enable in `.org/your-org-name/config.yaml`:
 ```yaml
 regional:
   enabled: true
@@ -140,7 +219,7 @@ regional:
         - "bangalore"
 ```
 
-2. Create regional context files in `config/regional/` with:
+2. Create regional context files in `.org/your-org-name/regional/`:
 - Educational institution rankings
 - Grading system interpretation
 - Resume presentation norms
@@ -191,6 +270,10 @@ See `config/regional/india_context.md` for an example.
 ---
 
 ## Common Commands
+
+**How to use:** 
+- **Claude:** Say commands directly
+- **Copilot:** Open Copilot Chat (Ctrl+I or Cmd+I), then say commands
 
 | What you say | What happens |
 |--------------|--------------|
@@ -247,7 +330,14 @@ If evaluating candidates from unfamiliar regions:
 
 ## Need Help?
 
-- See `CLAUDE.md` for the full methodology
-- See `config/schema.md` for configuration options
-- See `rubrics/README.md` for rubric customization
+**Core Methodology:**
+- See [AI.md](../AI.md) 🎯 for ALL evaluation logic, scoring, principles (shared foundation)
+
+**Configuration:**
+- See [config/schema.md](../config/schema.md) for all configuration options
+- See `.org/example/` for configuration templates
 - See `examples/` for sample evaluations
+
+**Provider-Specific Implementation:**
+- **Claude Code CLI:** See [CLAUDE.md](../CLAUDE.md) for agent dispatch and `.claude/agents/` for agent definitions
+- **VS Code + Copilot:** See [.github/copilot-instructions.md](../.github/copilot-instructions.md) for tool mappings
