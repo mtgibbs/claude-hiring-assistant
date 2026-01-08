@@ -73,7 +73,7 @@ Summarize:
 
 ## Important Rules
 
-- Process interviews **sequentially** to avoid conflicts
+- Process up to **5 interviews in parallel** for efficiency
 - Skip candidates who already have `INTERVIEW_ASSESSMENT.md`
 - Interview notes stay in the evaluation folder (not moved)
 - Both `INTERVIEW_ASSESSMENT.md` and `HR_SUMMARY_INTERVIEW.md` are created
@@ -82,14 +82,14 @@ Summarize:
 
 To avoid context overflow when assessing many interviews:
 
-1. **Run `/compact` before starting** if processing more than 3 interviews
-2. **Process strictly sequentially** - complete one assessment fully before starting the next
-3. **Never launch many agents in parallel** - parallel agent polling consumes context rapidly
-4. **If you must use parallel agents:**
+1. **Run `/compact` before starting** if processing more than 10 interviews
+2. **Process up to 5 agents in parallel** for efficiency
+3. **Use background agents properly:**
    - Use `run_in_background: true`
-   - Check with `TaskOutput block=true, timeout=300000` (one blocking call with 5-min timeout)
-   - Process in batches of 2-3 maximum
-   - Run `/compact` between batches
+   - Check with `TaskOutput block=true, timeout=300000` (blocking with 5-min timeout)
+   - **Never poll repeatedly** with `block=false` - each poll adds to context
+   - Wait for all agents in batch to complete before starting next batch
+4. **Run `/compact` between large batches** (10+ candidates)
 
 ## After Running
 

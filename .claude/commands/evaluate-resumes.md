@@ -88,16 +88,14 @@ Summarize:
 
 To avoid context overflow when processing many resumes:
 
-1. **Run `/compact` before starting** if processing more than 3 resumes
-2. **Process strictly sequentially** - complete one evaluation fully before starting the next
-3. **Never launch many agents in parallel** - parallel agent polling consumes context rapidly
-4. **If using background agents:**
+1. **Run `/compact` before starting** if processing more than 10 resumes
+2. **Process up to 5 agents in parallel** for efficiency
+3. **Use background agents properly:**
    - Use `run_in_background: true`
-   - Check with `TaskOutput block=true` (one blocking call, not repeated polling)
-   - Process in batches of 2-3 maximum
-5. **Interview prep specifically:**
-   - Process 2-3 candidates at a time, wait for completion
-   - Run `/compact` between batches if needed
+   - Check with `TaskOutput block=true, timeout=300000` (blocking with 5-min timeout)
+   - **Never poll repeatedly** with `block=false` - each poll adds to context
+   - Wait for all agents in batch to complete before starting next batch
+4. **Run `/compact` between large batches** (10+ candidates)
 
 ## Example Output
 

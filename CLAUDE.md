@@ -123,8 +123,6 @@ The following files are **templates** intended for other users of this framework
 | Create HR summaries | `candidate-summary-distiller` | After evaluation (phase=resume) or interview (phase=interview) |
 | Verify factual claims | `fact-checker` | After completing all evaluations in batch |
 | Generate batch reports & CSV | `batch-reporter` | After completing batch of evaluations |
-| **Other** |
-| Optimize/improve a resume | `resume-optimizer` | User wants to improve their own resume |
 
 ---
 
@@ -394,20 +392,16 @@ Role levels are configured in `.org/[org-name]/config.yaml`. Create subfolders i
 Processing many candidates can overflow agent context. Follow these rules:
 
 ### Before Large Batches
-- Run `/compact` before processing more than 3 candidates
+- Run `/compact` before processing more than 10 candidates
 - Check context usage and compact if needed between batches
 
-### Sequential Processing
-- Process candidates **one at a time** - complete fully before starting next
-- Never launch many evaluator agents in parallel
-- The workflow commands (evaluate-resumes, assess-interviews) enforce sequential processing
-
-### If Using Background Agents
-- Use `run_in_background: true`
-- Check with `TaskOutput block=true, timeout=300000` (blocking with 5-min timeout)
+### Parallel Processing (Up to 5 at a time)
+- Launch **up to 5 agents in parallel** for efficiency
+- Use `run_in_background: true` for parallel execution
+- Check results with `TaskOutput block=true, timeout=300000` (blocking with 5-min timeout)
 - **Never poll repeatedly** with `block=false` - each poll adds to context
-- Process in batches of 2-3 maximum
-- Run `/compact` between batches
+- Wait for all agents in a batch to complete before starting next batch
+- Run `/compact` between large batches (10+ candidates)
 
 ### Agent Return Messages
 Agents should return concise completion messages, not full analysis. Example:
