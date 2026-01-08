@@ -202,6 +202,7 @@ The following files are **templates** intended for other users of this framework
 │   │   └── 2024-01-18_❌_alex-jones_15-35/    # ❌ No Match (<57%)
 │   │       ├── [name]-evaluation.md
 │   │       ├── HR_SUMMARY_RESUME.md
+│   │       ├── INTERVIEW_NOTES.md (for ✅/⭐ - fillable template)
 │   │       ├── INTERVIEW_ASSESSMENT.md (after interview)
 │   │       ├── HR_SUMMARY_INTERVIEW.md (after interview)
 │   │       └── [resume].pdf
@@ -377,11 +378,41 @@ Role levels are configured in `.org/[org-name]/config.yaml`. Create subfolders i
 
 ### For Interview Prep:
 1. Launch `interview-prep` agent with candidate evaluation path
-2. Agent generates customized questions based on resume and role level
+2. Agent selects questions from `.org/[org]/rubrics/*_interview_questions.md` question banks
+3. Agent adds custom questions targeting gaps identified in the evaluation
+4. Saves `INTERVIEW_NOTES.md` - a fillable template for the interviewer to use during the interview
+5. After interview, the filled-in `INTERVIEW_NOTES.md` is read by `interview-assessor`
 
 ### For Candidate Comparison:
 1. Launch `candidate-comparer` agent with list of candidate evaluation paths
 2. Agent produces comparison analysis and recommendation
+
+---
+
+## Context Management (CRITICAL)
+
+Processing many candidates can overflow agent context. Follow these rules:
+
+### Before Large Batches
+- Run `/compact` before processing more than 3 candidates
+- Check context usage and compact if needed between batches
+
+### Sequential Processing
+- Process candidates **one at a time** - complete fully before starting next
+- Never launch many evaluator agents in parallel
+- The workflow commands (evaluate-resumes, assess-interviews) enforce sequential processing
+
+### If Using Background Agents
+- Use `run_in_background: true`
+- Check with `TaskOutput block=true, timeout=300000` (blocking with 5-min timeout)
+- **Never poll repeatedly** with `block=false` - each poll adds to context
+- Process in batches of 2-3 maximum
+- Run `/compact` between batches
+
+### Agent Return Messages
+Agents should return concise completion messages, not full analysis. Example:
+- Good: "Created evaluation for John Doe. Score: 28/35 (⭐). Recommendation: Interview."
+- Bad: [Full evaluation content repeated in return message]
 
 ---
 
@@ -399,22 +430,25 @@ Role levels are configured in `.org/[org-name]/config.yaml`. Create subfolders i
    - Generates HR summary
 3. Runs `fact-checker` to verify claims
 4. Runs `batch-reporter` to generate CSV
+5. For candidates recommended for interview (✅ or ⭐):
+   - Launches `interview-prep` agent to prepare questions from question bank
+   - Saves `INTERVIEW_NOTES.md` (fillable template) to each candidate's folder
 
 **Usage:** Just type `/evaluate-resumes` - no manual agent selection needed.
 
 ### `/assess-interviews` - Run Interview Assessment Workflow
 
-**Use after conducting interviews.** Drop interview notes into candidate evaluation folders, then run:
+**Use after conducting interviews.** Fill in the `INTERVIEW_NOTES.md` template during the interview, then run:
 
-1. Scans evaluation folders for unprocessed interview notes
+1. Scans evaluation folders for filled-in interview notes
 2. For each candidate with notes:
    - Launches `interview-assessor` agent
    - Generates interview HR summary
 3. Reports results
 
-**Supported note files:** `interview_notes.md`, `interview.md`, `notes.md`, `*.vtt`, `*.srt`
+**Supported note files:** `INTERVIEW_NOTES.md` (preferred - structured template), `*.vtt`, `*.srt`, `interview_notes.md`, `notes.md`
 
-**Usage:** Drop notes in evaluation folder, then type `/assess-interviews`
+**Usage:** Fill in `INTERVIEW_NOTES.md` during interview, then type `/assess-interviews`
 
 ---
 

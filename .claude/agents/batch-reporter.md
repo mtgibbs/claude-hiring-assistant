@@ -1,7 +1,7 @@
 ---
 name: batch-reporter
 description: Use this agent after completing a batch of resume evaluations to generate batch summary reports and CSV tracking files. This agent reads all evaluations in a batch and produces both markdown and CSV outputs for pipeline tracking.\n\n<example>\nContext: User has completed evaluating a batch of developer resumes.\nuser: "I've finished evaluating all 5 developer resumes. Can you create the batch report?"\nassistant: "I'll use the batch-reporter agent to generate the markdown summary and CSV tracking file."\n<uses Task tool to invoke batch-reporter>\n</example>\n\n<example>\nContext: User wants the CSV for spreadsheet import.\nuser: "I need the CSV file for the manager candidates I evaluated today."\nassistant: "Let me use the batch-reporter agent to generate the CSV tracking file."\n<uses Task tool to invoke batch-reporter>\n</example>
-model: sonnet
+model: haiku
 color: yellow
 ---
 

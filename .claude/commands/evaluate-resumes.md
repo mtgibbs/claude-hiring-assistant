@@ -46,7 +46,21 @@ For each resume found:
    - Evaluation file path
    - phase=resume
 
-### Step 3: Quality Checks (After All Evaluations)
+### Step 3: Interview Prep (For Passing Candidates)
+
+For each candidate with ✅ or ⭐ status:
+
+1. **Launch `interview-prep` agent** with:
+   - Candidate evaluation file path
+   - Uses haiku model (fast, cost-effective)
+
+2. **Agent will:**
+   - Load question bank from `.org/[org]/rubrics/*_interview_questions.md`
+   - Select 6-10 relevant questions from the bank
+   - Add 2-4 custom questions targeting gaps from evaluation
+   - Save `INTERVIEW_NOTES.md` - a fillable template the interviewer uses during the interview
+
+### Step 4: Quality Checks (After All Evaluations)
 
 1. **Launch `fact-checker` agent** to verify all factual claims in evaluations
 
@@ -54,7 +68,7 @@ For each resume found:
    - Batch summary markdown
    - CSV tracking file
 
-### Step 4: Report Results
+### Step 5: Report Results
 
 Summarize:
 - Total resumes processed
@@ -69,6 +83,21 @@ Summarize:
 - All evaluations go to `evaluations/` folder (gitignored)
 - Resumes are MOVED (not copied) to evaluation folders
 - CSV files are gitignored - safe to generate
+
+## Context Management (CRITICAL)
+
+To avoid context overflow when processing many resumes:
+
+1. **Run `/compact` before starting** if processing more than 3 resumes
+2. **Process strictly sequentially** - complete one evaluation fully before starting the next
+3. **Never launch many agents in parallel** - parallel agent polling consumes context rapidly
+4. **If using background agents:**
+   - Use `run_in_background: true`
+   - Check with `TaskOutput block=true` (one blocking call, not repeated polling)
+   - Process in batches of 2-3 maximum
+5. **Interview prep specifically:**
+   - Process 2-3 candidates at a time, wait for completion
+   - Run `/compact` between batches if needed
 
 ## Example Output
 
@@ -91,6 +120,9 @@ Evaluations created:
 - evaluations/developers/2024-01-15_⚠️_bob-wilson_22-35/
 - evaluations/managers/2024-01-15_⭐_alice-johnson_45-50/
 - evaluations/managers/2024-01-15_✅_charlie-brown_38-50/
+
+Interview prep generated for 4 candidates (✅/⭐):
+- INTERVIEW_NOTES.md (fillable template) added to each folder
 
 Reports:
 - Batch summary: reports/BATCH_2024-01-15.md

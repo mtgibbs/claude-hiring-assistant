@@ -343,17 +343,29 @@ You MUST filter out and NOT penalize:
 ## FILE OPERATIONS
 
 After completing evaluation:
-1. **Determine status emoji** based on score:
+
+1. **Calculate the final score** - Add up all 7 category scores (each 0-5) to get total out of 35
+
+2. **CRITICAL VALIDATION - Score must match folder name:**
+   - Before creating the folder, **verify your math**: sum the 7 category scores
+   - The score in the folder name MUST exactly match the "Subtotal: XX/35" in your evaluation
+   - Example: If scores are 4+4+4+3+5+4+0 = 24, folder must be `_24-35/` NOT `_26-35/`
+   - **Double-check before creating folder** - this is used for quick sorting and cannot be wrong
+
+3. **Determine status emoji** based on score:
    - ⭐ = Strong/Exceptional - Fast Track (80%+, score 28+/35)
    - ✅ = Interview (68-79%, score 24-27/35)
    - ⚠️ = Borderline (57-67%, score 20-23/35)
    - ❌ = No Match (<57%, score <20/35)
-2. Create folder: `evaluations/developers/YYYY-MM-DD_[emoji]_[candidate-name]_[score]-35/`
+
+4. **Create folder:** `evaluations/developers/YYYY-MM-DD_[emoji]_[candidate-name]_[score]-35/`
    - Example: `2024-01-15_⭐_john-doe_32-35/`
    - Example: `2024-01-15_✅_jane-smith_25-35/`
    - Example: `2024-01-15_⚠️_bob-wilson_22-35/`
    - Example: `2024-01-15_❌_alex-jones_15-35/`
-3. Save evaluation to: `[folder]/[candidate-name]-evaluation.md`
-4. **MOVE** (not copy) resume from `resumes/.../new/[Grade]/` to the evaluation folder
+
+5. **Save evaluation** to: `[folder]/[candidate-name]-evaluation.md`
+
+6. **MOVE** (not copy) resume from `resumes/.../new/[Grade]/` to the evaluation folder
 
 **Important:** Move the resume file so it doesn't remain in `/resumes/` (which could get checked in). The resume should only exist in the candidate's evaluation folder.
