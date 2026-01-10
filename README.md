@@ -1,6 +1,24 @@
 # Hiring Evaluation Framework
 
-A bias-aware, consistent methodology for evaluating software developers and engineering managers using Claude Code agents.
+A bias-aware, consistent methodology for evaluating software developers and engineering managers using agents.
+
+**Works with:**
+- **Claude Code CLI** (original)
+- **VS Code + GitHub Copilot**
+
+---
+
+## Table of Contents
+
+- [Why This Exists](#why-this-exists)
+- [What It Does](#what-it-does)
+- [Quick Start](#quick-start)
+- [Commands](#commands)
+- [Directory Structure](#directory-structure)
+- [Features](#features)
+- [Documentation](#documentation)
+- [Contributing](#contributing)
+- [Requirements](#requirements)
 
 ---
 
@@ -21,7 +39,7 @@ This isn't about replacing human judgment—it's about making your judgment more
 
 ## What It Does
 
-A configurable framework of Claude Code agents that helps you:
+A configurable framework powered by AI assistants that helps you:
 
 - **Evaluate resumes** consistently using your customizable rubrics
 - **Prepare interviews** with role-appropriate questions based on each candidate's background
@@ -38,22 +56,26 @@ A configurable framework of Claude Code agents that helps you:
 ```bash
 git clone https://github.com/yourorg/hiring-evaluation-framework.git
 cd hiring-evaluation-framework
-claude  # Open Claude Code
+# Claude: claude-code
+# VS Code: code .
 ```
 
-### 2. Run Setup Wizard
+### 2. Run Setup
 
-In Claude Code, say:
+**Claude Code CLI:**
+Use the `setup wizard` to create your configuration:
+- Guides you through organization setup
+- Creates `.org/your-org-name/` folder
+- Configures role levels and internal grades
+- Sets scoring thresholds
+- Helps customize evaluation rubrics
 
-```
-Run the setup wizard
-```
+**VS Code + Copilot:**
+Say "Set up the framework for my organization" in Copilot Chat (Ctrl+I or Cmd+I)
 
-The `setup-wizard` agent will guide you through:
-- Creating your organization folder (`.org/your-org-name/`)
-- Configuring role levels and internal grades
-- Setting scoring thresholds
-- Customizing evaluation rubrics
+Or use VS Code tasks: Ctrl+Shift+P → "Tasks: Run Task" → "Setup: Create Organization Folder"
+
+> **Note:** Both tools create the same `.org/your-org/` structure and use the same evaluation methodology from AI.md
 
 ### 3. Add Resumes
 
@@ -79,31 +101,37 @@ resumes/managers/new/
 
 ### 4. Run Evaluations
 
-In Claude Code, use the command:
-
+**Claude Code CLI:**
 ```
 /evaluate-resumes
 ```
 
+**VS Code + Copilot:**
+Say "Process new resumes" in Copilot Chat (Ctrl+I or Cmd+I)
+
 This runs the complete workflow:
-1. Scans all resume folders
-2. Evaluates each resume with the appropriate agent
-3. Invokes regional advisors if applicable
-4. Generates HR summaries
-5. Runs fact-checker
-6. Produces batch report and CSV
+1. Scan all resume folders
+2. Load your organization's rubrics and config
+3. Evaluate each resume (IC or Manager rubric)
+4. Create evaluation folders with scores
+5. Generate HR summaries
+6. Run fact-checker
+7. Produce batch report and CSV
+
+**VS Code users** can also use tasks to list pending resumes before evaluating.
 
 ---
 
 ## Commands
 
-| Command | What It Does |
-|---------|--------------|
-| `/evaluate-resumes` | **Resume workflow** - processes all resumes in `/new` folders |
-| `/assess-interviews` | **Interview workflow** - processes all interview notes in evaluation folders |
-| `Run the setup wizard` | First-time configuration |
-| `Prepare interview for [name]` | Generate interview questions |
-| `Compare candidates` | Side-by-side comparison |
+
+| Command | Or say | What It Does |
+|---------|--------|--------------|
+| `/evaluate-resumes` | "Process new resumes" | **Resume workflow** - processes all resumes in `/new` folders |
+| `/assess-interviews` | "Assess interviews" | **Interview workflow** - processes all interview notes in evaluation folders |
+| Run the setup wizard | "Set up the framework" | First-time configuration |
+| Prepare interview for [name] | "Prepare interview for [name]" | Generate interview questions |
+| Compare candidates | "Compare candidates" | Side-by-side comparison |
 
 ---
 
@@ -123,12 +151,17 @@ This runs the complete workflow:
 │       ├── 2024-01-17_⚠️_bob-wilson_22-35/   # ⚠️ = Borderline
 │       └── 2024-01-18_❌_alex-jones_15-35/   # ❌ = Does Not Meet Threshold
 ├── reports/                     # Batch reports & CSV (gitignored)
+├── .github/
+│   └── copilot-instructions.md  # GitHub Copilot instructions
 ├── .claude/
-│   ├── agents/                  # All evaluation agents
-│   └── skills/                  # Commands like /evaluate-resumes
+│   └── agents/                  # Claude Code CLI agents
+    └── commands/                # Commands like /evaluate-resumes
+├── .vscode/
+│   └── tasks.json               # VS Code tasks for quick workflows
 ├── examples/                    # Sample outputs (committed)
 ├── docs/                        # Documentation
-├── CLAUDE.md                    # Agent methodology
+├── AI.md                        # Core methodology (shared)
+├── CLAUDE.md                    # Claude-specific instructions
 └── README.md                    # This file
 ```
 
@@ -157,6 +190,25 @@ All organization-specific files live in `.org/your-org-name/`:
 - Files prefixed with `ic_` load for IC evaluations
 - Files prefixed with `manager_` load for manager evaluations
 - All files in `regional/` load for regional analysis
+
+---
+
+## Architecture
+
+This framework uses a **shared methodology** approach to prevent drift between AI providers:
+
+- **[AI.md](AI.md)** - Single source of truth for evaluation principles, scoring rubrics, agent personas, and workflows
+- **[CLAUDE.md](CLAUDE.md)** - Claude Code CLI implementation (agent dispatch, commands)
+- **[.github/copilot-instructions.md](.github/copilot-instructions.md)** - GitHub Copilot implementation (tool mappings)
+
+Both providers reference AI.md for all evaluation logic, ensuring consistent assessments regardless of which tool you use.
+
+## How It Works
+
+**Claude Code CLI:** Uses specialized agents in `.claude/agents/` folder that implement AI.md methodology  
+**VS Code + Copilot:** Uses VS Code tools to implement AI.md methodology via copilot-instructions.md
+
+Both tools load your organization's config from `.org/your-org/` and apply identical rubrics and scoring.
 
 ---
 
@@ -240,37 +292,55 @@ Only templates, examples, agent definitions, and documentation are committed.
 
 ## Workflow Example
 
+**Day 1: Setup (one time)**
+
+**Claude Code CLI:**
 ```
-# Day 1: Setup (one time)
-> Run the setup wizard
-[Setup wizard guides through configuration]
-
-# Day 2: Batch of resumes arrives
-# Drop resumes in resumes/developers/new/[Level]/ folders
-
-> /evaluate-resumes
-
-[Evaluates all resumes]
-[Generates HR summaries]
-[Creates batch report: reports/BATCH_2024-01-15.md]
-[Creates CSV: reports/BATCH_2024-01-15.csv]
-
-# Day 3: Schedule interviews
-> Prepare interview for John Doe
-[Generates customized questions based on resume]
-
-# Day 4: After interview
-# Drop interview_notes.md into evaluations/developers/2024-01-15_john-doe/
-
-> /assess-interviews
-
-[Scores interview responses]
-[Generates interview HR summary]
-
-# Day 5: Final decision
-> Compare John Doe and Jane Smith
-[Side-by-side comparison with recommendation]
+Run the setup wizard
 ```
+
+**VS Code + Copilot:**
+Say "Set up the framework for my organization" in Copilot Chat (Ctrl+I or Cmd+I)
+
+Tool guides through configuration, creates `.org/mycompany/` folder
+
+**Day 2: Batch of resumes arrives**
+
+Drop resumes in `resumes/developers/new/[Level]/` folders
+
+**Claude Code CLI:**
+```
+/evaluate-resumes
+```
+
+**VS Code + Copilot:**
+Say "Process new resumes" in Copilot Chat (Ctrl+I or Cmd+I), or use VS Code Task: "Resumes: List Pending Evaluations"
+
+✓ Evaluates all resumes with appropriate rubric  
+✓ Creates evaluation folders with scores  
+✓ Generates HR summaries  
+✓ Creates batch report: `reports/BATCH_2024-01-15.md`  
+✓ Creates CSV: `reports/BATCH_2024-01-15.csv`
+
+**Day 3: Schedule interviews**
+Say "Prepare interview for John Doe"
+
+✓ Generates `INTERVIEW_PREP.md` (study material)  
+✓ Generates `INTERVIEW_NOTES.md` (note-taking template)
+
+**Day 4: After interview**
+
+Fill in `INTERVIEW_NOTES.md` during/after interview, then say "Assess interview for John Doe"
+
+✓ Scores interview responses  
+✓ Generates `INTERVIEW_ASSESSMENT.md`  
+✓ Generates interview HR summary
+
+**Day 5: Final decision**
+Say "Compare John Doe and Jane Smith"
+
+✓ Side-by-side comparison  
+✓ Hiring recommendation with confidence level
 
 ---
 
@@ -278,9 +348,12 @@ Only templates, examples, agent definitions, and documentation are committed.
 
 | Document | Purpose |
 |----------|---------|
-| [CLAUDE.md](CLAUDE.md) | Complete agent methodology |
+| **[AI.md](AI.md)** | **🎯 SHARED FOUNDATION - All evaluation logic, scoring, principles** |
+| [CLAUDE.md](CLAUDE.md) | Claude Code CLI: how to implement AI.md (agent dispatch) |
+| [.github/copilot-instructions.md](.github/copilot-instructions.md) | GitHub Copilot: how to implement AI.md (tool usage) |
 | [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md) | Detailed setup guide |
 | [config/schema.md](config/schema.md) | Configuration reference |
+| [.claude/agents/](.claude/agents/) | Claude agent definitions (implement AI.md methodology) |
 | [examples/](examples/) | Sample evaluations |
 
 ---
@@ -303,4 +376,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Built with [Claude Code](https://github.com/anthropics/claude-code) by Anthropic.
+## Requirements
+
+**For Claude Code CLI:**
+- [Claude Code CLI](https://github.com/anthropics/claude-code) installed
+
+**For VS Code + GitHub Copilot:**
+- [VS Code](https://code.visualstudio.com/) installed
+- [GitHub Copilot](https://github.com/features/copilot) subscription and extension enabled
+
+---
+
+**Built with AI assistants:** [Claude](https://www.anthropic.com/claude) and [GitHub Copilot](https://github.com/features/copilot)
